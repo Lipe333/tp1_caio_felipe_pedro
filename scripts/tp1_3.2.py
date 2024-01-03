@@ -218,6 +218,8 @@ def main():
     # Criação do esquema e tabelas
     create_schema(conn)
     create_tables(conn, sql_queries)
+
+    # Povoar tabelas
     inserir_dados_do_arquivo("amazon-meta.txt")
     
 
