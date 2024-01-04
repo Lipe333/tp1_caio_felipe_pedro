@@ -10,7 +10,7 @@ try:
     conn = psycopg2.connect(
         dbname="postgres",
         user="postgres",
-        password="bd123",
+        password="postgres",
         host="localhost",
         port="5432"
     )
@@ -93,7 +93,6 @@ sql_queries = [
 
     """
     ]
-
 
 # Função que realiza a extração e inserção das categorias na tabela Categoria
 def inserir_categorias(asin, categories):
@@ -211,20 +210,18 @@ def inserir_dados_do_arquivo(file_path):
 
     # Confirmação das alterações no banco de dados
     conn.commit()
-    print("Dados inseridos com sucesso!")
-
 
 def main():
     # Criação do esquema e tabelas
     create_schema(conn)
     create_tables(conn, sql_queries)
 
-    # Povoar tabelas
+    # Chamada de função que realiza o povoamento das tabelas do banco de dados
     inserir_dados_do_arquivo("amazon-meta.txt")
-    
 
     # Encerramento da conexão
     conn.close()
+    print("\nDados inseridos com sucesso!")
 
 if __name__ == "__main__":
     main()
